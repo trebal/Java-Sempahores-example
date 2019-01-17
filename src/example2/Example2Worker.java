@@ -1,10 +1,10 @@
-package Problem2.SectionA;
+package example2;
 
-public class ThreadWorker2A extends Thread {
+public class Example2Worker extends Thread {
 
     private final int id;
 
-    ThreadWorker2A(int id) {
+    Example2Worker(int id) {
         this.id = id;
     }
 
@@ -19,12 +19,12 @@ public class ThreadWorker2A extends Thread {
 
     private void work() throws InterruptedException {
 
-        Problem2A.semaphores[id - 1].acquire(1);
+        Example2Master.semaphores[id - 1].acquire(1);
 
         System.out.println("Thread id: " + id);
 
-        if (id < Problem2A.N) {
-            Problem2A.semaphores[id].release(1);
+        if (id < Example2Master.N) {
+            Example2Master.semaphores[id].release(1);
         }
     }
 }

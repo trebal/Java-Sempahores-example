@@ -1,4 +1,4 @@
-package Problem2.SectionB;
+package example1;
 
 import java.util.concurrent.Semaphore;
 
@@ -7,11 +7,16 @@ import java.util.concurrent.Semaphore;
  *
  * Statement: make the thread 1 print its id, then the thread 2. The rest
  * of the threads have to print their id after the 2 has finished.
+ * The order of the rest does not matters.
  * Use only semaphores as synchronization tool.
  */
-public class Problem2B {
+public class Example1Master {
 
+    /**
+     * Number of threads to use.
+     */
     private static final int N = 10;
+
     public static Semaphore semaphoreThread2;
     public static Semaphore[] semaphoresRest;
 
@@ -25,9 +30,9 @@ public class Problem2B {
         }
 
         // Threads
-        ThreadWorker2B[] threads = new ThreadWorker2B[N];
+        Example2Worker[] threads = new Example2Worker[N];
         for (int i = 0; i < N; i++) {
-            threads[i] = new ThreadWorker2B(i + 1);
+            threads[i] = new Example2Worker(i + 1);
             threads[i].start();
         }
     }

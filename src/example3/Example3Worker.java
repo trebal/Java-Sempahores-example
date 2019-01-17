@@ -1,16 +1,16 @@
-package Problem2.SectionC;
+package example3;
 
-public class ThreadWorker2C extends Thread {
+public class Example3Worker extends Thread {
 
     private final int id;
 
-    ThreadWorker2C(int id) {
+    Example3Worker(int id) {
         this.id = id;
     }
 
     @Override
     public void run() {
-        if (id == Problem2C.N) {
+        if (id == Example3Master.N) {
             try {
                 ThreadN();
             } catch (InterruptedException e) {
@@ -29,22 +29,22 @@ public class ThreadWorker2C extends Thread {
 
         System.out.println("Thread id: " + id);
 
-        synchronized (Problem2C.class) {
-            Problem2C.totalSum += id;
+        synchronized (Example3Master.class) {
+            Example3Master.totalSum += id;
         }
 
-        Problem2C.semaphorePrint.release(1);
+        Example3Master.semaphorePrint.release(1);
     }
 
     private void ThreadN() throws InterruptedException {
 
         System.out.println("Thread id: " + id);
 
-        Problem2C.semaphorePrint.acquire(Problem2C.N - 1);
+        Example3Master.semaphorePrint.acquire(Example3Master.N - 1);
 
-        Problem2C.totalSum+=id;
+        Example3Master.totalSum+=id;
 
         /* Print total sum */
-        System.out.println("Total sum: " + Problem2C.totalSum);
+        System.out.println("Total sum: " + Example3Master.totalSum);
     }
 }
